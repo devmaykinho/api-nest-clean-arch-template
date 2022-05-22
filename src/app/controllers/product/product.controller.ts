@@ -1,14 +1,15 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { ProductCreateRequest } from 'src/app/requests/product/product-create.request';
-import { CreateProductUseCase } from 'src/domain/usecases/product/create-product.usecase';
+import { CreateProductFactory } from 'src/infra/factories/product/create-product.factory';
 
 @Controller('product')
 export class ProductController {
-  constructor(private readonly createProductUseCase: CreateProductUseCase) {}
+  constructor(private readonly factory: CreateProductFactory) {}
   @Post()
-  create(@Body() body: ProductCreateRequest) {
+  async create(@Body() body: ProductCreateRequest) {
     const id = 1;
     const { name, description, value } = body;
-    return this.createProductUseCase.create({ id, name, description, value });
+    const createProductUsecase = this.factory.createProductUsecase();
+    return await createProductUsecase.create({ id, name, description, value });
   }
 }

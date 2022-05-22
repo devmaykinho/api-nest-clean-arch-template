@@ -1,3 +1,5 @@
+import { ProductModel } from 'src/domain/models/product.model';
+
 export interface CreateProductRepository {
-  create: () => Promise<void>;
+  create: (product: ProductModel) => Promise<void>;
 }
