@@ -1,4 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
+import { convertToFindAllProducs } from 'src/app/mappers/convert-to-find-all-products.mapper';
 import { FindAllProductsResponse } from 'src/app/responses/find-all-products.response';
 import { FindAllProductsFactory } from 'src/infra/factories/product/find-all-products.factory';
 
@@ -8,6 +9,7 @@ export class FindAllProductsController {
   @Get()
   async findAll(): Promise<Array<FindAllProductsResponse>> {
     const findAllProductsUsecase = this.factory.findAllProductsUsecase();
-    return await findAllProductsUsecase.find();
+    const products = await findAllProductsUsecase.find();
+    return products.map((product) => convertToFindAllProducs(product));
   }
 }
