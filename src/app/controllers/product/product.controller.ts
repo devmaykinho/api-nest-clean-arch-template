@@ -1,6 +1,6 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { ProductCreateRequest } from 'src/app/request/product/product-create.request';
-import { CreateProductUseCase } from 'src/domain/usecase/product/create-product.usecase';
+import { ProductCreateRequest } from 'src/app/requests/product/product-create.request';
+import { CreateProductUseCase } from 'src/domain/usecases/product/create-product.usecase';
 
 @Controller('product')
 export class ProductController {
