@@ -6,6 +6,9 @@ import { CreateProductRepositoryPg } from '../infra/repositories/product/create-
 import { CreateProductFactory } from 'src/infra/factories/product/create-product.factory';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProductEntity } from '../infra/entities/product.entity';
+import { FindAllProductsController } from './controllers/product/find-all-products.controller';
+import { FindAllProductsRepositoryPg } from 'src/infra/repositories/product/find-all-product.repository.pg';
+import { FindAllProductsFactory } from 'src/infra/factories/product/find-all-products.factory';
 
 @Module({
   imports: [
@@ -21,7 +24,13 @@ import { ProductEntity } from '../infra/entities/product.entity';
     }),
     TypeOrmModule.forFeature([ProductEntity]),
   ],
-  controllers: [AppController, ProductController],
-  providers: [AppService, CreateProductRepositoryPg, CreateProductFactory],
+  controllers: [AppController, ProductController, FindAllProductsController],
+  providers: [
+    AppService,
+    CreateProductRepositoryPg,
+    CreateProductFactory,
+    FindAllProductsRepositoryPg,
+    FindAllProductsFactory,
+  ],
 })
 export class AppModule {}
